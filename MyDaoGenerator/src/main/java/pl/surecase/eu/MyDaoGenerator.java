@@ -8,11 +8,11 @@ public class MyDaoGenerator {
 
     public static void main(String args[]) throws Exception {
         Schema schema = new Schema(3, "greendao");
-        Entity box = schema.addEntity("Box");
-        box.addIdProperty();
-        box.addStringProperty("name");
-        box.addIntProperty("slots");
-        box.addStringProperty("description");
+        Entity catBearFact = schema.addEntity("CatBearFact");
+        catBearFact.addIdProperty();
+        catBearFact.addStringProperty("name");
+        catBearFact.addIntProperty("rating");
+        catBearFact.addStringProperty("comment");
         new DaoGenerator().generateAll(schema, args[0]);
     }
 }
