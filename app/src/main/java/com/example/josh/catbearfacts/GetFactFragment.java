@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -27,6 +28,8 @@ import java.io.InputStreamReader;
 public class GetFactFragment extends Fragment {
 
     TextView mTextView;
+    Button mNextButton;
+    Button mSaveButton;
 
     public static GetFactFragment newInstance(String param1, String param2) {
         GetFactFragment fragment = new GetFactFragment();
@@ -48,7 +51,26 @@ public class GetFactFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_get_fact, container, false);
+
         mTextView = (TextView) view.findViewById(R.id.fact);
+        mNextButton = (Button) view.findViewById(R.id.next_button);
+        mSaveButton = (Button) view.findViewById(R.id.save_button);
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new getFactTask().execute();
+            }
+
+        });
+
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //fill in
+            }
+        });
+
         new getFactTask().execute();
         return view;
     }
