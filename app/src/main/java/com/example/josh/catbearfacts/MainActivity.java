@@ -1,17 +1,35 @@
 package com.example.josh.catbearfacts;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.ActionBar;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        ActionBar.Tab tab = actionBar.newTab()
+                .setText("Get Fact")
+                .setTabListener(new TabListener<GetFactFragment>(this, "newFact", GetFactFragment.class));
+        actionBar.addTab(tab);
+
+        tab = actionBar.newTab()
+                .setText("Saved Facts")
+                .setTabListener(new TabListener<SavedFactsFragment>(this, "SavedFacts", SavedFactsFragment.class));
+
+        actionBar.addTab(tab);
+
     }
 
 

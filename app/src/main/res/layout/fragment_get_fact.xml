@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.josh.catbearfacts.GetFactFragment">
+
+    <TextView android:id="@+id/fact"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fact" />
+
+    <Button android:id="@+id/next_button"
+        android:layout_margin="5dp"
+        android:layout_below="@id/fact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"/>
+
+    <Button android:id="@+id/save_button"
+        android:layout_margin="5dp"
+        android:layout_below="@id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"/>
+
+</RelativeLayout>
