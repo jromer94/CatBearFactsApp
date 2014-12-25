@@ -1,6 +1,7 @@
 package com.example.josh.catbearfacts;
 
 
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,7 +14,7 @@ import android.view.ViewGroup;
  * Use the {@link SavedFactsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SavedFactsFragment extends Fragment {
+public class SavedFactsFragment extends ListFragment{
 
     public static SavedFactsFragment newInstance(String param1, String param2) {
         SavedFactsFragment fragment = new SavedFactsFragment();
