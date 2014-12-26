@@ -2,6 +2,7 @@ package com.example.josh.catbearfacts;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import greendao.DaoMaster;
 import greendao.DaoSession;

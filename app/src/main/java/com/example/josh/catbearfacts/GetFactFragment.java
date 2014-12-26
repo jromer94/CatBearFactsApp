@@ -4,6 +4,7 @@ package com.example.josh.catbearfacts;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import greendao.CatBearFact;
+import greendao.CatBearFactDao;
+import greendao.DaoSession;
 
 
 /**
@@ -55,11 +60,11 @@ public class GetFactFragment extends Fragment {
         mTextView = (TextView) view.findViewById(R.id.fact);
         mNextButton = (Button) view.findViewById(R.id.next_button);
         mSaveButton = (Button) view.findViewById(R.id.save_button);
-
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new getFactTask().execute();
+                Log.d("CatBearFact", "Retrieved new Fact");
             }
 
         });
@@ -67,7 +72,13 @@ public class GetFactFragment extends Fragment {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //fill in
+                DaoSession session = ((MyApplication) getActivity().getApplicationContext()).getDaoSession();
+                CatBearFactDao factDao = session.getCatBearFactDao();
+                CatBearFact fact = new CatBearFact();
+                fact.setName(mTextView.getText().toString());
+                factDao.insert(fact);
+                Log.d("GetFactFragment", "Inserted new Fact ID: " + fact.getId());
+                new getFactTask().execute();
             }
         });
 
