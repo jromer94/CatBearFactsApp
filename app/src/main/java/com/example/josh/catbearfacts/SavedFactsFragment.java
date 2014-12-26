@@ -7,6 +7,13 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+
+import greendao.CatBearFact;
+import greendao.CatBearFactDao;
+import greendao.DaoSession;
 
 
 /**
@@ -15,6 +22,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class SavedFactsFragment extends ListFragment{
+
+    ArrayList<CatBearFact> mFacts;
 
     public static SavedFactsFragment newInstance(String param1, String param2) {
         SavedFactsFragment fragment = new SavedFactsFragment();
@@ -34,8 +43,20 @@ public class SavedFactsFragment extends ListFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saved_facts, container, false);
+        DaoSession session = ((MyApplication) getActivity().getApplicationContext()).getDaoSession();
+        CatBearFactDao factDao = session.getCatBearFactDao();
+        mFacts = (ArrayList<CatBearFact>) factDao.loadAll();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, factsToStrings());
+        setListAdapter(adapter);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    private ArrayList<String> factsToStrings(){
+        ArrayList<String> strings = new ArrayList<String>();
+        for(int i = 0; i < mFacts.size(); i++){
+            strings.add(mFacts.get(i).getName());
+        }
+        return strings;
     }
 
 
