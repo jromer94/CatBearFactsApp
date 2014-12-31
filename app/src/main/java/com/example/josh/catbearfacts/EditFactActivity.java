@@ -1,5 +1,6 @@
 package com.example.josh.catbearfacts;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,15 +13,16 @@ import android.view.ViewGroup;
 import android.os.Build;
 
 
-public class EditFactActivity extends ActionBarActivity {
+public class EditFactActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_fact);
+        long id = getIntent().getLongExtra("FACT_ID", 1);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, EditFactFragment.newInstance(id))
                     .commit();
         }
     }
@@ -48,19 +50,5 @@ public class EditFactActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_edit_fact, container, false);
-            return rootView;
-        }
-    }
 }

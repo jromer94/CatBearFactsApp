@@ -2,12 +2,14 @@ package com.example.josh.catbearfacts;
 
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -43,12 +45,26 @@ public class SavedFactsFragment extends ListFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
         DaoSession session = ((MyApplication) getActivity().getApplicationContext()).getDaoSession();
         CatBearFactDao factDao = session.getCatBearFactDao();
         mFacts = (ArrayList<CatBearFact>) factDao.loadAll();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, factsToStrings());
         setListAdapter(adapter);
-        return super.onCreateView(inflater, container, savedInstanceState);
+
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Intent intent = new Intent(getActivity(), EditFactActivity.class);
+        intent.putExtra("FACT_ID", mFacts.get(position).getId());
+        startActivity(intent);
     }
 
     private ArrayList<String> factsToStrings(){

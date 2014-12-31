@@ -1,6 +1,7 @@
 package com.example.josh.catbearfacts;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -75,7 +76,7 @@ public class EditFactFragment extends Fragment {
                mFact.setName(mFactEdit.getText().toString());
                mFact.setComment(mMessageEdit.getText().toString());
                mFactDao.update(mFact);
-               //TODO return to last activity
+               getActivity().finish();
             }
         });
 
@@ -84,7 +85,7 @@ public class EditFactFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mFactDao.delete(mFact);
-                //TODO return to last activity
+                getActivity().finish();
             }
         });
 
